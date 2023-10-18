@@ -1,8 +1,10 @@
-import FilmsList from '../../components/films/filmsList';
+import { Link } from 'react-router-dom';
+import FilmsList from '../../components/films/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/header/logo';
-import UserBlock from '../../components/header/userBlock';
+import UserBlock from '../../components/header/user-block';
 import { moreLikeThisFilms } from '../../data';
+import { AppRoute } from '../../consts';
 
 function Film(): JSX.Element {
   return (
@@ -42,7 +44,7 @@ function Film(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to={AppRoute.AddReview} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>

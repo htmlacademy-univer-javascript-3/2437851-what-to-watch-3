@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import Logo from '../../components/header/logo';
-import UserBlock from '../../components/header/userBlock';
+import UserBlock from '../../components/header/user-block';
 import Review from '../../components/review/review';
+import { AppRoute } from '../../consts';
 
 function AddReview(): JSX.Element {
   return (
@@ -18,7 +20,7 @@ function AddReview(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to={AppRoute.Film} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>

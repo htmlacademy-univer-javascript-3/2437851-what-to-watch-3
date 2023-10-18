@@ -1,4 +1,4 @@
-import FilmCard from './filmCard';
+import FilmCard from './film-card';
 
 type FilmCardDecoration = {
   title: string;
