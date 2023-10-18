@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../components/header/logo';
-import UserBlock from '../../components/header/userBlock';
+import UserBlock from '../../components/header/user-block';
 import Review from '../../components/review/review';
 import { AppRoute } from '../../consts';
 

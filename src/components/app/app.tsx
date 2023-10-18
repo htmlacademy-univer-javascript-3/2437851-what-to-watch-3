@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../../pages/main/main';
 import NotFound from '../../pages/not-found/not-found';
-import SignIn from '../../pages/signIn/signIn';
-import MyList from '../../pages/myList/myList';
+import SignIn from '../../pages/sign-in/sign-in';
+import MyList from '../../pages/my-list/my-list';
 import Film from '../../pages/film/film';
-import AddReview from '../../pages/addReview/addReview';
+import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 import PrivateRoute from '../private-route/private-route';

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import FilmsList from '../../components/films/filmsList';
+import FilmsList from '../../components/films/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/header/logo';
-import UserBlock from '../../components/header/userBlock';
+import UserBlock from '../../components/header/user-block';
 import { moreLikeThisFilms } from '../../data';
 import { AppRoute } from '../../consts';
 
