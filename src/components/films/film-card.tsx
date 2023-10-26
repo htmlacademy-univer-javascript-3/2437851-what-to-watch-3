@@ -1,19 +1,25 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../consts';
+import { Film } from '../../types/film';
 
-type FilmCardDecoration = {
-  title: string;
-  posterPath: string;
+type FilmCardProps = {
+  film: Film;
+  onMouseEnter: (id: string) => void;
+  onMouseLeave: () => void;
 }
 
-function FilmCard({title, posterPath}: FilmCardDecoration): JSX.Element {
+function FilmCard({ film, onMouseEnter, onMouseLeave }: FilmCardProps): JSX.Element {
+  const navigate = useNavigate();
+
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card" onMouseEnter={() => onMouseEnter(film.id)} onMouseLeave={onMouseLeave} onClick={() => navigate(`/${AppRoute.Films}/${film.id}`)}>
       <div className="small-film-card__image">
-        <img src={posterPath} alt={title} width="280" height="175" />
+        <img src={film.posterImage} alt={film.name} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={AppRoute.Film}>{title}</Link>
+        <a className='small-film-card__link'>
+          {film.name}
+        </a>
       </h3>
     </article>
   );
