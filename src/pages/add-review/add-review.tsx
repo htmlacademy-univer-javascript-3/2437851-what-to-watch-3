@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/header/logo';
 import UserBlock from '../../components/header/user-block';
 import Review from '../../components/review/review';
@@ -7,10 +7,13 @@ import { Film } from '../../types/film';
 import Poster from '../../components/poster/poster';
 
 type AddReviewProps = {
-  film: Film;
+  films: Film[];
 }
 
-function AddReview({film}: AddReviewProps): JSX.Element {
+function AddReview({films}: AddReviewProps): JSX.Element {
+  const location = useParams();
+  const film = films.filter((f) => f.id === location.id)[0];
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">

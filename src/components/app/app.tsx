@@ -9,12 +9,14 @@ import Player from '../../pages/player/player';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 import PrivateRoute from '../private-route/private-route';
 import {Film as FilmType} from '../../types/film';
+import { Review } from '../../types/review';
 
 type AppProps = {
   films: FilmType[];
+  reviews: Review[];
 };
 
-function App({films}: AppProps): JSX.Element {
+function App({films, reviews}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -28,10 +30,10 @@ function App({films}: AppProps): JSX.Element {
           }
           />
           <Route path={`${AppRoute.Films}/:id/`}>
-            <Route index element={<Film currentFilm={films[0]} films={films} />} />
-            <Route path={AppRoute.Review} element={<AddReview film={films[0]} />} />
+            <Route index element={<Film films={films} reviews={reviews} />} />
+            <Route path={AppRoute.Review} element={<AddReview films={films} />} />
           </Route>
-          <Route path={`${AppRoute.Player}/:id`} element={<Player film={films[0]} />} />
+          <Route path={`${AppRoute.Player}/:id`} element={<Player films={films} />} />
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>

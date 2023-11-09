@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FilmsList from '../../components/films/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/header/logo';
@@ -6,13 +6,18 @@ import UserBlock from '../../components/header/user-block';
 import { AppRoute } from '../../consts';
 import { Film as FilmType } from '../../types/film';
 import Poster from '../../components/poster/poster';
+import Tabs from '../../components/tabs/tabs';
+import { Review } from '../../types/review';
 
 type FilmProps = {
-  currentFilm: FilmType;
   films: FilmType[];
+  reviews: Review[];
 }
 
-function Film({currentFilm, films}: FilmProps): JSX.Element {
+function Film({films, reviews}: FilmProps): JSX.Element {
+  const location = useParams();
+  const currentFilm = films.filter((f) => f.id === location.id)[0];
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -59,38 +64,7 @@ function Film({currentFilm, films}: FilmProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <Poster film={currentFilm} additionalClassName='film-card__poster--big' />
-
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{currentFilm.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{`${currentFilm.scoresCount} ratings`}</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{currentFilm.description}</p>
-
-                <p className="film-card__director"><strong>{`Director: ${currentFilm.director}`}</strong></p>
-
-                <p className="film-card__starring"><strong>{`Starring: ${currentFilm.starring.join(', ')}`}</strong></p>
-              </div>
-            </div>
+            <Tabs film={currentFilm} reviews={reviews} />
           </div>
         </div>
       </section>
@@ -99,7 +73,7 @@ function Film({currentFilm, films}: FilmProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films} />
+          <FilmsList films={films.filter((f) => f.genre === currentFilm.genre)} />
         </section>
 
         <Footer />
