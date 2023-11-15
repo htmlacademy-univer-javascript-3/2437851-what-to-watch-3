@@ -3,6 +3,8 @@ import App from './components/app/app';
 import React from 'react';
 import { films } from './mocks/films';
 import { reviews } from './mocks/reviews';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,6 +12,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App films={films} reviews={reviews} />
+    <Provider store={store}>
+      <App films={films} reviews={reviews} />
+    </Provider>
   </React.StrictMode>
 );

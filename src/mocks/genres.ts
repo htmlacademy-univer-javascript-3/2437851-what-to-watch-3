@@ -1,14 +1,13 @@
 import { Genre } from '../types/genre';
 
 export const genres: Genre[] = [
-  'All genres',
-  'Comedies',
+  'Comedy',
   'Crime',
   'Documentary',
-  'Dramas',
+  'Drama',
   'Horror',
   'Kids & Family',
   'Romance',
   'Sci-Fi',
-  'Thrillers'
+  'Thriller'
 ];
