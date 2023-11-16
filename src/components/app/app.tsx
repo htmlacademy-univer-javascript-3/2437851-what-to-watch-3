@@ -21,7 +21,7 @@ function App({films, reviews}: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root}>
-          <Route index element={<Main currentFilm={films[0]} films={films} />} />
+          <Route index element={<Main currentFilm={films[0]} />} />
           <Route path={AppRoute.Login} element={<SignIn />} />
           <Route path={AppRoute.MyList} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
