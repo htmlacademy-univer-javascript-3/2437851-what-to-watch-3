@@ -4,15 +4,17 @@ import GenresList from '../../components/genres/genres-list';
 import Logo from '../../components/header/logo';
 import UserBlock from '../../components/header/user-block';
 import Poster from '../../components/poster/poster';
+import { useAppSelector } from '../../hooks';
 import { genres } from '../../mocks/genres';
 import { Film } from '../../types/film';
 
 type MainProps = {
   currentFilm: Film;
-  films: Film[];
 }
 
-function Main({currentFilm, films}: MainProps): JSX.Element {
+function Main({currentFilm}: MainProps): JSX.Element {
+  const films = useAppSelector((state) => state.films);
+
   return (
     <>
       <section className="film-card">

@@ -9,7 +9,7 @@ type GenreProps = {
 function Genre({genre, isActive, onClick}: GenreProps): JSX.Element {
   return (
     <li className={buildClassName('catalog__genres-item', isActive ? 'catalog__genres-item--active' : undefined)}>
-      <a href="#" className="catalog__genres-link" onClick={() => onClick(genre)}>{genre}</a>
+      <div className="catalog__genres-link" onClick={() => onClick(genre)}>{genre}</div>
     </li>
   );
 }
