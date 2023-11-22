@@ -4,6 +4,7 @@ import GenresList from '../../components/genres/genres-list';
 import Logo from '../../components/header/logo';
 import UserBlock from '../../components/header/user-block';
 import Poster from '../../components/poster/poster';
+import ShowMore from '../../components/show-more/show-more';
 import { useAppSelector } from '../../hooks';
 import { genres } from '../../mocks/genres';
 import { Film } from '../../types/film';
@@ -14,6 +15,7 @@ type MainProps = {
 
 function Main({currentFilm}: MainProps): JSX.Element {
   const films = useAppSelector((state) => state.films);
+  const diplayedFilmsCount = useAppSelector((state) => state.diplayedFilmsCount);
 
   return (
     <>
@@ -63,13 +65,9 @@ function Main({currentFilm}: MainProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
           <GenresList genres={genres} />
-          <FilmsList films={films} />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <FilmsList films={films.slice(0, diplayedFilmsCount)} />
+          {films.length > diplayedFilmsCount && <ShowMore />}
         </section>
 
         <Footer />
