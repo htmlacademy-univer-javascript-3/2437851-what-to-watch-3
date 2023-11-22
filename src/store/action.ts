@@ -6,3 +6,5 @@ export const selectGenre = createAction('select-genre', (genre: Genre | undefine
 }));
 
 export const loadFilms = createAction('load-films');
+
+export const showMoreFilms = createAction('show-more-films');
