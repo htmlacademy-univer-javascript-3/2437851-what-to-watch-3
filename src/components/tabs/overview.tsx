@@ -1,7 +1,7 @@
-import { Film } from '../../types/film';
+import { FilmDetails } from '../../types/film';
 
 type OverviewProps = {
-  film: Film;
+  film: FilmDetails;
 }
 
 function Overview({film}: OverviewProps): JSX.Element {

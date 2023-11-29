@@ -1,9 +1,11 @@
 import { buildClassName } from '../../helpers/class-name-builder';
 import { AdditionalClassName } from '../../types/additional-class-name';
-import { Film } from '../../types/film';
 
 type PosterProps = {
-  film: Film;
+  film: {
+    posterImage: string;
+    name: string;
+  };
 } & AdditionalClassName;
 
 function Poster({film, additionalClassName}: PosterProps): JSX.Element {

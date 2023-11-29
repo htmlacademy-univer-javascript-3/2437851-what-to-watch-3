@@ -1,13 +1,12 @@
-import { useParams } from 'react-router-dom';
-import { Film } from '../../types/film';
+import { useFilm } from '../../hooks/use-film';
+import NotFound from '../not-found/not-found';
 
-type PlayerProps = {
-  films: Film[];
-}
+function Player(): JSX.Element {
+  const film = useFilm();
 
-function Player({films}: PlayerProps): JSX.Element {
-  const location = useParams();
-  const film = films.filter((f) => f.id === location.id)[0];
+  if (!film) {
+    return (<NotFound />);
+  }
 
   return (
     <div className="player">
