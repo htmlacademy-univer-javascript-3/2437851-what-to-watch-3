@@ -6,16 +6,13 @@ import UserBlock from '../../components/header/user-block';
 import Poster from '../../components/poster/poster';
 import ShowMore from '../../components/show-more/show-more';
 import { useAppSelector } from '../../hooks';
-import { genres } from '../../mocks/genres';
-import { Film } from '../../types/film';
 
-type MainProps = {
-  currentFilm: Film;
-}
-
-function Main({currentFilm}: MainProps): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+function Main(): JSX.Element {
   const diplayedFilmsCount = useAppSelector((state) => state.diplayedFilmsCount);
+  const currentFilm = useAppSelector((state) => state.promoFilm);
+  const films = useAppSelector((state) => state.films);
+  // eslint-disable-next-line no-console
+  console.log(films);
 
   return (
     <>
@@ -65,7 +62,7 @@ function Main({currentFilm}: MainProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList genres={genres} />
+          <GenresList genres={films.map((f) => f.genre)} />
           <FilmsList films={films.slice(0, diplayedFilmsCount)} />
           {films.length > diplayedFilmsCount && <ShowMore />}
         </section>

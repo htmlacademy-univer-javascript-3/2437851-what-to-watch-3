@@ -33,8 +33,8 @@ function FilmCard({ film, onMouseEnter, onMouseLeave }: FilmCardProps): JSX.Elem
       <div className="small-film-card__image">
         {
           isHovered
-            ? <PreviewPlayer videoLink={film.videoLink} poster={film.posterImage} width={width} height={height} />
-            : <img src={film.posterImage} width={width} height={height} />
+            ? <PreviewPlayer videoLink={film.previewVideoLink} poster={film.previewImage} width={width} height={height} />
+            : <img src={film.previewImage} width={width} height={height} />
         }
       </div>
       <h3 className="small-film-card__title">

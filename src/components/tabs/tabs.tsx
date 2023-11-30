@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Film } from '../../types/film';
+import { FilmDetails } from '../../types/film';
 import Overview from './overview';
 import Details from './details';
 import Reviews from './reviews';
@@ -7,14 +7,14 @@ import cn from 'classnames';
 import { Review } from '../../types/review';
 
 type TabsProps = {
-  film: Film;
+  film: FilmDetails;
   reviews: Review[];
 }
 
 function Tabs({film, reviews}: TabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState('Overview');
 
-  const tabs: [string, (film: Film) => JSX.Element][] = [
+  const tabs: [string, (film: FilmDetails) => JSX.Element][] = [
     ['Overview', () => (<Overview film={film} />)],
     ['Details', () => (<Details film={film} />)],
     ['Reviews', () => (<Reviews reviews={reviews} />)],

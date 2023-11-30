@@ -2,13 +2,11 @@ import FilmsList from '../../components/films/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/header/logo';
 import UserBlock from '../../components/header/user-block';
-import { Film } from '../../types/film';
+import { useAppSelector } from '../../hooks';
 
-type MyListProps = {
-  films: Film[];
-}
+function MyList(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
 
-function MyList({films}: MyListProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -19,6 +17,9 @@ function MyList({films}: MyListProps): JSX.Element {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
+        {
+          // todo use favourite films
+        }
         <FilmsList films={films} />
       </section>
 
