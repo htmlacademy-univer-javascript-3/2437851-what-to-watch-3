@@ -6,19 +6,23 @@ import UserBlock from '../../components/header/user-block';
 import Poster from '../../components/poster/poster';
 import ShowMore from '../../components/show-more/show-more';
 import { useAppSelector } from '../../hooks';
+import Loading from '../loading/loading';
 
 function Main(): JSX.Element {
   const diplayedFilmsCount = useAppSelector((state) => state.diplayedFilmsCount);
-  const currentFilm = useAppSelector((state) => state.promoFilm);
+  const promoFilm = useAppSelector((state) => state.promoFilm);
   const films = useAppSelector((state) => state.films);
-  // eslint-disable-next-line no-console
-  console.log(films);
+  const isLoading = useAppSelector((state) => state.isLoading);
+
+  if (isLoading || promoFilm === null) {
+    return (<Loading />);
+  }
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
+          <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -30,13 +34,13 @@ function Main(): JSX.Element {
 
         <div className="film-card__wrap">
           <div className="film-card__info">
-            <Poster film={currentFilm} />
+            <Poster film={promoFilm} />
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{currentFilm.name}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{currentFilm.genre}</span>
-                <span className="film-card__year">{currentFilm.released}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">

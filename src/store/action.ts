@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Genre } from '../types/genre';
 import { Film, FilmDetails, PromoFilm } from '../types/film';
+import { AuthorizationStatus } from '../consts';
 
 export const selectGenre = createAction<Genre | undefined>('select-genre');
 
@@ -15,3 +16,5 @@ export const setCurrentFilm = createAction<FilmDetails>('set-current-film');
 export const setPromoFilm = createAction<PromoFilm>('set-promo-film');
 
 export const setFilmsLoading = createAction<boolean>('set-films-loading');
+
+export const setAuthorizationStatus = createAction<AuthorizationStatus>('set-authorization-status');

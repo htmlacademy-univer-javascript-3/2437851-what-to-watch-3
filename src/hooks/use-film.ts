@@ -15,16 +15,3 @@ export const useFilm = () => {
 
   return useAppSelector((state) => state.currentFilm);
 };
-
-export const useRevi = () => {
-  const {id} = useParams();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchFilm(id));
-    }
-  }, [dispatch, id]);
-
-  return useAppSelector((state) => state.currentFilm);
-};
