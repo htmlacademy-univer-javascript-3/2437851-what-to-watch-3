@@ -11,6 +11,7 @@ const root = ReactDOM.createRoot(
 
 store.dispatch(fetchFilms());
 store.dispatch(fetchPromoFilm());
+// store.dispatch(checkLogin());
 
 root.render(
   <React.StrictMode>

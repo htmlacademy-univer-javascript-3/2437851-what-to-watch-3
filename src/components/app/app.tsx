@@ -6,7 +6,7 @@ import MyList from '../../pages/my-list/my-list';
 import Film from '../../pages/film/film';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
-import { AppRoute, AuthorizationStatus } from '../../consts';
+import { AppRoute } from '../../consts';
 import PrivateRoute from '../private-route/private-route';
 import { useAppSelector } from '../../hooks';
 import Loading from '../../pages/loading/loading';
@@ -27,7 +27,7 @@ function App(): JSX.Element {
           <Route index element={<Main />} />
           <Route path={AppRoute.Login} element={<SignIn />} />
           <Route path={AppRoute.MyList} element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <PrivateRoute>
               <MyList />
             </PrivateRoute>
           }
