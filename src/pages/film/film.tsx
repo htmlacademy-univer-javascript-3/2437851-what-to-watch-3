@@ -1,18 +1,38 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FilmsList from '../../components/films/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/header/logo';
 import UserBlock from '../../components/header/user-block';
-import { AppRoute } from '../../consts';
+import { AppRoute, AuthorizationStatus } from '../../consts';
 import Poster from '../../components/poster/poster';
 import Tabs from '../../components/tabs/tabs';
-import { useAppSelector } from '../../hooks';
-import { useFilm } from '../../hooks/use-film';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import NotFound from '../not-found/not-found';
+import { fetchComments, fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
+import { useEffect } from 'react';
+import Loading from '../loading/loading';
 
 function Film(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
-  const currentFilm = useFilm();
+  const {id} = useParams();
+  const isLoading = useAppSelector((state) => state.isLoading);
+  const currentFilm = useAppSelector((state) => state.currentFilm);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
+  const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
+  const comments = useAppSelector((state) => state.comments);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchFilm(id));
+      dispatch(fetchSimilarFilms(id));
+      dispatch(fetchComments(id));
+    }
+  }, [dispatch, id]);
+
+  if (isLoading) {
+    return (<Loading />);
+  }
 
   if (!currentFilm) {
     return (<NotFound />);
@@ -53,9 +73,12 @@ function Film(): JSX.Element {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">{films.length}</span>
+                  <span className="film-card__count">{favoriteFilms.length}</span>
                 </button>
-                <Link to={`${AppRoute.Review}`} className="btn film-card__button">Add review</Link>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth &&
+                  <Link to={`${AppRoute.Review}`} className="btn film-card__button">Add review</Link>
+                }
               </div>
             </div>
           </div>
@@ -64,7 +87,7 @@ function Film(): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <Poster film={currentFilm} additionalClassName='film-card__poster--big' />
-            <Tabs film={currentFilm} reviews={[]} />
+            <Tabs film={currentFilm} comments={comments} />
           </div>
         </div>
       </section>
@@ -73,7 +96,7 @@ function Film(): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films.filter((f) => f.genre === currentFilm.genre)} />
+          <FilmsList films={similarFilms} />
         </section>
 
         <Footer />

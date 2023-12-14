@@ -1,21 +1,21 @@
-import { Review } from '../../types/review';
+import { Comment } from '../../types/comment';
 
 const DATE_FORMATTING_OPTIONS: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
 type ReviewsProps = {
-  reviews: Review[];
+  comments: Comment[];
 }
 
 function formatDate(isoDate: string): string {
   return new Date(isoDate).toLocaleDateString('en-us', DATE_FORMATTING_OPTIONS);
 }
 
-function Reviews({reviews}: ReviewsProps): JSX.Element {
+function Reviews({comments}: ReviewsProps): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {
-          reviews.map((r) => (
+          comments.map((r) => (
             <div className="review" key={r.id}>
               <blockquote className="review__quote">
                 <p className="review__text">{r.comment}</p>

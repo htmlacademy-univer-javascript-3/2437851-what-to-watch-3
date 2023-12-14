@@ -4,20 +4,20 @@ import Overview from './overview';
 import Details from './details';
 import Reviews from './reviews';
 import cn from 'classnames';
-import { Review } from '../../types/review';
+import { Comment } from '../../types/comment';
 
 type TabsProps = {
   film: FilmDetails;
-  reviews: Review[];
+  comments: Comment[];
 }
 
-function Tabs({film, reviews}: TabsProps): JSX.Element {
+function Tabs({film, comments}: TabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState('Overview');
 
   const tabs: [string, (film: FilmDetails) => JSX.Element][] = [
     ['Overview', () => (<Overview film={film} />)],
     ['Details', () => (<Details film={film} />)],
-    ['Reviews', () => (<Reviews reviews={reviews} />)],
+    ['Reviews', () => (<Reviews comments={comments} />)],
   ];
 
   return (

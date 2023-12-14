@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/header/logo';
 import { login } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../consts';
 
 function SignIn(): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    dispatch(login({email, password}));
+  };
 
   return (
     <div className="user-page">
@@ -20,7 +22,7 @@ function SignIn(): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form action="" className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" required value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -32,11 +34,7 @@ function SignIn(): JSX.Element {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="button" onClick={() => {
-              dispatch(login({ email, password }));
-              navigate(AppRoute.Root);
-            }}
-            >
+            <button className="sign-in__btn" type="submit">
               Sign in
             </button>
           </div>

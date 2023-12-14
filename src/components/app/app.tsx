@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Main from '../../pages/main/main';
 import NotFound from '../../pages/not-found/not-found';
 import SignIn from '../../pages/sign-in/sign-in';
@@ -8,20 +8,12 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import { AppRoute } from '../../consts';
 import PrivateRoute from '../private-route/private-route';
-import { useAppSelector } from '../../hooks';
-import Loading from '../../pages/loading/loading';
+import browserHistory from '../../browser-history';
+import HistoryRouter from '../history-route/history-route';
 
 function App(): JSX.Element {
-  const isLoading = useAppSelector((state) => state.isLoading);
-
-  if (isLoading) {
-    return (
-      <Loading />
-    );
-  }
-
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Root}>
           <Route index element={<Main />} />
@@ -40,7 +32,7 @@ function App(): JSX.Element {
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
