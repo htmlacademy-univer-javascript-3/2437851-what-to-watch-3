@@ -1,4 +1,4 @@
-export type Review = {
+export type Comment = {
   id: string;
   date: string;
   user: string;

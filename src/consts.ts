@@ -1,3 +1,5 @@
+export const AUTH_TOKEN_KEY_NAME = 'WTW';
+
 export enum AppRoute {
   Root = '/',
   Login = 'login',
