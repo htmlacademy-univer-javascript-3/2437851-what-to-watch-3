@@ -3,9 +3,10 @@ import Footer from '../../components/footer/footer';
 import Logo from '../../components/header/logo';
 import UserBlock from '../../components/header/user-block';
 import { useAppSelector } from '../../hooks';
+import { getFavoriteFilms } from '../../store/films-process/selectors';
 
 function MyList(): JSX.Element {
-  const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
 
   return (
     <div className="user-page">

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { showMoreFilms } from '../../store/action';
+import { showMoreFilms } from '../../store/films-process/films-process';
 
 function ShowMore(): JSX.Element {
   const dispatch = useDispatch();

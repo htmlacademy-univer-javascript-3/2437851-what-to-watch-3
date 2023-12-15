@@ -11,15 +11,18 @@ import NotFound from '../not-found/not-found';
 import { fetchComments, fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
 import { useEffect } from 'react';
 import Loading from '../loading/loading';
+import { getCurrentFilm, getFavoriteFilms, getIsLoading, getSimilarFilms } from '../../store/films-process/selectors';
+import { getComments } from '../../store/comments-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function Film(): JSX.Element {
   const {id} = useParams();
-  const isLoading = useAppSelector((state) => state.isLoading);
-  const currentFilm = useAppSelector((state) => state.currentFilm);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
-  const comments = useAppSelector((state) => state.comments);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isLoading = useAppSelector(getIsLoading);
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
+  const comments = useAppSelector(getComments);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

@@ -6,9 +6,10 @@ import { AppRoute } from '../../consts';
 import Poster from '../../components/poster/poster';
 import { useAppSelector } from '../../hooks';
 import NotFound from '../not-found/not-found';
+import { getCurrentFilm } from '../../store/films-process/selectors';
 
 function AddReview(): JSX.Element {
-  const film = useAppSelector((state) => state.currentFilm);
+  const film = useAppSelector(getCurrentFilm);
 
   if (!film) {
     return (<NotFound />);

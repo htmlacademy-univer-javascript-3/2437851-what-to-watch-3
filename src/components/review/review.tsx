@@ -3,12 +3,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import NotFound from '../../pages/not-found/not-found';
 import { postReview } from '../../store/api-actions';
 import { getInclusiveRange } from '../../utils';
+import { getCurrentFilm } from '../../store/films-process/selectors';
 
 function Review(): JSX.Element {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.currentFilm);
+  const film = useAppSelector(getCurrentFilm);
 
   if (film === undefined) {
     return (<NotFound />);
