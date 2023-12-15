@@ -6,13 +6,14 @@ import UserBlock from '../../components/header/user-block';
 import Poster from '../../components/poster/poster';
 import ShowMore from '../../components/show-more/show-more';
 import { useAppSelector } from '../../hooks';
+import { getDiplayedFilmsCount, getFilms, getIsLoading, getPromoFilm } from '../../store/films-process/selectors';
 import Loading from '../loading/loading';
 
 function Main(): JSX.Element {
-  const diplayedFilmsCount = useAppSelector((state) => state.diplayedFilmsCount);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
-  const films = useAppSelector((state) => state.films);
-  const isLoading = useAppSelector((state) => state.isLoading);
+  const diplayedFilmsCount = useAppSelector(getDiplayedFilmsCount);
+  const promoFilm = useAppSelector(getPromoFilm);
+  const films = useAppSelector(getFilms);
+  const isLoading = useAppSelector(getIsLoading);
 
   if (isLoading || promoFilm === null) {
     return (<Loading />);

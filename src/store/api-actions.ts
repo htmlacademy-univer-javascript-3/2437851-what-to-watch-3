@@ -3,11 +3,14 @@ import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { Film, FilmDetails, PromoFilm } from '../types/film';
 import { APIRoute } from '../routes';
-import { redirectToRoute, setAuthorizationStatus, setComments, setCurrentFilm, setFilms, setFilmsLoading, setPromoFilm } from './action';
 import { AppRoute, AuthorizationStatus } from '../consts';
 import { Comment } from '../types/comment';
 import { AuthorizationDetails } from '../types/auth';
 import { saveToken } from '../services/token';
+import { setCurrentFilm, setFilms, setFilmsLoading, setPromoFilm } from './films-process/films-process';
+import { setComments } from './comments-process/comments-process';
+import { setAuthorizationStatus } from './user-process/user-process';
+import { redirectToRoute } from './action';
 
 export const fetchFilms = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

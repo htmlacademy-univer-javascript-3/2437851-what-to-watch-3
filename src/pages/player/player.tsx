@@ -1,8 +1,9 @@
-import { useFilm } from '../../hooks/use-film';
+import { useAppSelector } from '../../hooks';
+import { getCurrentFilm } from '../../store/films-process/selectors';
 import NotFound from '../not-found/not-found';
 
 function Player(): JSX.Element {
-  const film = useFilm();
+  const film = useAppSelector(getCurrentFilm);
 
   if (!film) {
     return (<NotFound />);
