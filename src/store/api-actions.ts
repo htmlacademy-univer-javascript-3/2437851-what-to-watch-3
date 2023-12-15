@@ -7,7 +7,7 @@ import { AppRoute, AuthorizationStatus } from '../consts';
 import { Comment } from '../types/comment';
 import { AuthorizationDetails } from '../types/auth';
 import { saveToken } from '../services/token';
-import { setCurrentFilm, setFilms, setFilmsLoading, setPromoFilm } from './films-process/films-process';
+import { setCurrentFilm, setFavoriteFilms, setFilms, setFilmsLoading, setIsFavorite, setPromoFilm } from './films-process/films-process';
 import { setComments } from './comments-process/comments-process';
 import { setAuthorizationStatus } from './user-process/user-process';
 import { redirectToRoute } from './action';
@@ -68,17 +68,15 @@ export const fetchSimilarFilms = createAsyncThunk<void, string, {
   },
 );
 
-export const fetchFavoriteFilms = createAsyncThunk<void, string, {
+export const fetchFavoriteFilms = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'fetch-favorite-films',
-  async (id, {dispatch, extra: api}) => {
-    dispatch(setFilmsLoading(true));
-    const {data} = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
-    dispatch(setFilms(data));
-    dispatch(setFilmsLoading(false));
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Film[]>(APIRoute.Favorite);
+    dispatch(setFavoriteFilms(data));
   },
 );
 
@@ -130,5 +128,18 @@ export const postReview = createAsyncThunk<void, { filmId: string; comment: stri
   async ({ filmId, comment, rating }, { dispatch, extra: api }) => {
     await api.post(`${APIRoute.Comments}/${filmId}`, {comment, rating});
     dispatch(redirectToRoute(`${AppRoute.Films}/${filmId}`));
+  },
+);
+
+export const changeFavoriteFilm = createAsyncThunk<void, { filmId: string; status: number }, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'change-favorite-film',
+  async ({filmId, status}, { dispatch, extra: api }) => {
+    const {data} = await api.post<FilmDetails>(`${APIRoute.Favorite}/${filmId}/${status}`);
+    dispatch(setIsFavorite(data));
+    dispatch(fetchFavoriteFilms());
   },
 );
