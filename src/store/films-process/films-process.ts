@@ -49,8 +49,17 @@ export const filmsProcess = createSlice({
     },
     setFilmsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
-    }
+    },
+    setIsFavorite: (state, action: PayloadAction<FilmDetails>) => {
+      if (state.currentFilm?.id === action.payload.id) {
+        state.currentFilm.isFavorite = action.payload.isFavorite;
+      }
+
+      if (state.promoFilm?.id === action.payload.id) {
+        state.promoFilm.isFavorite = action.payload.isFavorite;
+      }
+    },
   }
 });
 
-export const {selectGenre, loadFilms, showMoreFilms, setFilms, setSimilarFilms, setFavoriteFilms, setCurrentFilm, setPromoFilm, setFilmsLoading} = filmsProcess.actions;
+export const {selectGenre, loadFilms, showMoreFilms, setFilms, setSimilarFilms, setFavoriteFilms, setCurrentFilm, setPromoFilm, setFilmsLoading, setIsFavorite} = filmsProcess.actions;

@@ -11,16 +11,17 @@ import NotFound from '../not-found/not-found';
 import { fetchComments, fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
 import { useEffect } from 'react';
 import Loading from '../loading/loading';
-import { getCurrentFilm, getFavoriteFilms, getIsLoading, getSimilarFilms } from '../../store/films-process/selectors';
+import { getCurrentFilm, getIsLoading, getSimilarFilms } from '../../store/films-process/selectors';
 import { getComments } from '../../store/comments-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import Play from '../../components/play/play';
+import FavoriteList from '../../components/favorite-list/favorite-list';
 
 function Film(): JSX.Element {
   const {id} = useParams();
   const isLoading = useAppSelector(getIsLoading);
   const currentFilm = useAppSelector(getCurrentFilm);
   const similarFilms = useAppSelector(getSimilarFilms);
-  const favoriteFilms = useAppSelector(getFavoriteFilms);
   const comments = useAppSelector(getComments);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
@@ -37,7 +38,7 @@ function Film(): JSX.Element {
     return (<Loading />);
   }
 
-  if (!currentFilm) {
+  if (id === undefined || !currentFilm) {
     return (<NotFound />);
   }
 
@@ -65,19 +66,8 @@ function Film(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{favoriteFilms.length}</span>
-                </button>
+                <Play film={currentFilm} />
+                <FavoriteList film={currentFilm} />
                 {
                   authorizationStatus === AuthorizationStatus.Auth &&
                   <Link to={`${AppRoute.Review}`} className="btn film-card__button">Add review</Link>
