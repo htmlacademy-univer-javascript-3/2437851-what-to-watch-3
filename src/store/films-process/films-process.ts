@@ -1,9 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Film, FilmDetails, PromoFilm } from '../../types/film';
 import { Genre } from '../../types/genre';
-import { Namespace } from '../../consts';
-
-const FILMS_PAGE_SIZE = 8;
+import { FILMS_PAGE_SIZE, Namespace } from '../../consts';
 
 const initialState = {
   genre: undefined as Genre | undefined,
