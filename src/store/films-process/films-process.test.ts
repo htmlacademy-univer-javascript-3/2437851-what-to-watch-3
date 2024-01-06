@@ -2,6 +2,7 @@ import { describe, it } from 'vitest';
 import { filmsProcess } from './films-process';
 import { Genre } from '../../types/genre';
 import { Film, FilmDetails, PromoFilm } from '../../types/film';
+import { FILMS_PAGE_SIZE } from '../../consts';
 
 describe('FilmsProcess Slice', () => {
   it('should return initial state with empty action', () => {
@@ -14,7 +15,7 @@ describe('FilmsProcess Slice', () => {
       films: [] as Film[],
       favoriteFilms: [] as Film[],
       similarFilms: [] as Film[],
-      diplayedFilmsCount: 8,
+      diplayedFilmsCount: FILMS_PAGE_SIZE,
       isLoading: false,
     };
 
