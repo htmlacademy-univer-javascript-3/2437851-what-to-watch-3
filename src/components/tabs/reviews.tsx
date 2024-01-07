@@ -1,13 +1,8 @@
 import { Comment } from '../../types/comment';
-
-const DATE_FORMATTING_OPTIONS: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+import { formatDate } from '../../utils/utils';
 
 type ReviewsProps = {
   comments: Comment[];
-}
-
-function formatDate(isoDate: string): string {
-  return new Date(isoDate).toLocaleDateString('en-us', DATE_FORMATTING_OPTIONS);
 }
 
 function Reviews({comments}: ReviewsProps): JSX.Element {

@@ -1,4 +1,5 @@
 import { FilmDetails } from '../../types/film';
+import { formatRunTime } from '../../utils/utils';
 
 type DetailsProps = {
   film: FilmDetails;
@@ -15,14 +16,28 @@ function Details({film}: DetailsProps): JSX.Element {
 
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
-          <span className="film-card__details-value">{film.starring.join(',')}</span>
+          <span className="film-card__details-value">
+            {film.starring
+              .map((s, index) => (
+                <>
+                  {s}
+                  {
+                    index < film.starring.length - 1 &&
+                    <>
+                      ,
+                      <br />
+                    </>
+                  }
+                </>
+              ))}
+          </span>
         </p>
       </div>
 
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.runTime}</span>
+          <span className="film-card__details-value">{formatRunTime(film.runTime)}</span>
         </p>
 
         <p className="film-card__details-item">

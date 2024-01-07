@@ -1,8 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import NotFound from '../../pages/not-found/not-found';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { postReview } from '../../store/api-actions';
-import { getInclusiveRange } from '../../utils';
+import { getInclusiveRange } from '../../utils/utils';
 import { getCurrentFilm } from '../../store/films-process/selectors';
 
 function Review(): JSX.Element {
@@ -12,7 +12,7 @@ function Review(): JSX.Element {
   const film = useAppSelector(getCurrentFilm);
 
   if (film === undefined) {
-    return (<NotFound />);
+    return (<NotFoundScreen />);
   }
 
   const createRatingStar = (n: number): JSX.Element => (
