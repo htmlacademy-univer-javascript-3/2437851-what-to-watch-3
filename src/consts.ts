@@ -1,6 +1,16 @@
+export const BACKEND_URL = 'https://13.design.pages.academy/wtw';
+
+export const REQUEST_TIMEOUT_MS = 5000;
+
 export const AUTH_TOKEN_KEY_NAME = 'WTW';
 
-export const FILMS_PAGE_SIZE = 8;
+export const DEFAULT_FILMS_PAGE_SIZE = 8;
+
+export const ALL_FILMS_GENRE = 'All Genres';
+
+export const FILM_PREVIEW_DURATION_MS = 1000;
+
+export const DATE_FORMATTING_OPTIONS: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
 export enum AppRoute {
   Root = '/',
@@ -11,14 +21,17 @@ export enum AppRoute {
   Player = 'player',
 }
 
-export enum AuthorizationStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
-}
-
 export enum Namespace {
   User = 'USER',
   Films = 'FILMS',
   Comments = 'COMMENTS',
+}
+
+export enum APIRoute {
+  Login = '/login',
+  Logout = '/logout',
+  Films = '/films',
+  Promo = '/promo',
+  Comments = '/comments',
+  Favorite = '/favorite',
 }

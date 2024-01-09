@@ -7,7 +7,7 @@ import { createAPI } from '../services/api';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
 import { AppThunkDispatch } from './mocks';
-import HistoryRouter from '../components/history-route/history-route';
+import HistoryRouter from '../components/history-router/history-router';
 import { Provider } from 'react-redux';
 
 export function withHistory(component: JSX.Element, history?: MemoryHistory) {

@@ -12,30 +12,31 @@ type TabsProps = {
 }
 
 function Tabs({film, comments}: TabsProps): JSX.Element {
-  const [activeTab, setActiveTab] = useState('Overview');
+  const tabs = {
+    ['Overview']: <Overview film={film} />,
+    ['Details']: <Details film={film} />,
+    ['Reviews']: <Reviews comments={comments} />,
+  };
 
-  const tabs: [string, (film: FilmDetails) => JSX.Element][] = [
-    ['Overview', () => (<Overview film={film} />)],
-    ['Details', () => (<Details film={film} />)],
-    ['Reviews', () => (<Reviews comments={comments} />)],
-  ];
+  const [activeTab, setActiveTab] = useState<keyof typeof tabs>('Overview');
 
   return (
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           {
-            tabs.map((tab) => (
-              <li className={cn('film-nav__item', {'film-nav__item--active': activeTab === tab[0]})} key={tab[0]}>
-                <a className="film-nav__link" onClick={() => setActiveTab(tab[0])}>{tab[0]}</a>
-              </li>))
+            Object.keys(tabs)
+              .map((tab) => (
+                <li className={cn('film-nav__item', {'film-nav__item--active': activeTab === tab})} key={tab}>
+                  <a className="film-nav__link" onClick={() => setActiveTab(tab as keyof typeof tabs)}>{tab}</a>
+                </li>
+              ))
           }
         </ul>
       </nav>
 
       {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        tabs.find((tab) => tab[0] === activeTab)![1](film)
+        tabs[activeTab]
       }
     </div>
   );

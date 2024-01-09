@@ -1,9 +1,10 @@
-import Logo from '../header/logo';
+import Logo from '../logo/logo';
 
 function Footer(): JSX.Element {
   return (
     <footer className="page-footer">
-      <Logo additionalClassName="logo__link--light" />
+      <Logo lightLogo />
+
       <div className="copyright">
         <p>© 2019 What to watch Ltd.</p>
       </div>

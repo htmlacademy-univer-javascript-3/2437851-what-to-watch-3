@@ -1,4 +1,4 @@
-import {AUTH_TOKEN_KEY_NAME} from '../consts.ts';
+import { AUTH_TOKEN_KEY_NAME } from '../consts.ts';
 
 export type Token = string;
 

@@ -1,6 +1,7 @@
 import { describe, it } from 'vitest';
-import { commentsProcess, setComments } from './comments-process';
+import { commentsProcess } from './comments-process';
 import { makeFakeComment } from '../../utils/mocks';
+import { fetchComments } from '../api-actions';
 
 describe('CommentsProcess Slice', () => {
   it('should return initial state with empty action', () => {
@@ -21,11 +22,11 @@ describe('CommentsProcess Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should update authorization status with "setAuthorizationStatus" action', () => {
+  it('should set comments with "fetchComments.fulfilled" action', () => {
     const initialState = { comments: [] };
     const expectedComments = Array.from({length: 5}).map(makeFakeComment);
 
-    const result = commentsProcess.reducer(initialState, setComments(expectedComments));
+    const result = commentsProcess.reducer(initialState, fetchComments.fulfilled(expectedComments, '', '', undefined));
 
     expect(result.comments).toBe(expectedComments);
   });

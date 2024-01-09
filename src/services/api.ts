@@ -1,13 +1,17 @@
-import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { getToken } from './token';
+import { BACKEND_URL, REQUEST_TIMEOUT_MS } from '../consts';
+import { toast } from 'react-toastify';
 
-const BACKEND_URL = 'https://13.design.pages.academy/wtw';
-const REQUEST_TIMEOUT = 5000;
+type ErrorDetails = {
+  messages: string[];
+}
 
-type DetailMessageType = {
+type ErrorMessage = {
   type: string;
   message: string;
+  details: ErrorDetails[];
 }
 
 const StatusCodeMapping: Record<number, boolean> = {
@@ -21,7 +25,7 @@ const shouldDisplayError = (response: AxiosResponse) => StatusCodeMapping[respon
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BACKEND_URL,
-    timeout: REQUEST_TIMEOUT,
+    timeout: REQUEST_TIMEOUT_MS,
   });
 
   api.interceptors.request.use(
@@ -38,8 +42,11 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.response.use(
     (response) => response,
-    (error: AxiosError<DetailMessageType>) => {
-      if (error.response && shouldDisplayError(error.response)) { /* empty */ }
+    (error: AxiosError<ErrorMessage>) => {
+      if (error.response && shouldDisplayError(error.response)) {
+        const detailMessage = (error.response.data);
+        toast.warn(detailMessage.details.at(0)?.messages.at(0) ?? detailMessage.message);
+      }
 
       throw error;
     }

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './private-route';
 import { render, screen } from '@testing-library/react';
 import { withHistory, withStore } from '../../utils/mock-component';
-import { AppRoute, AuthorizationStatus } from '../../consts';
+import { AppRoute } from '../../consts';
 import { makeFakeStore } from '../../utils/mocks';
 
 describe('Component: PrivateRoute', () => {
@@ -61,7 +61,7 @@ describe('Component: PrivateRoute', () => {
       mockHistory
     );
 
-    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({USER: { authorizationStatus: AuthorizationStatus.NoAuth }}));
+    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
 
     render(withStoreComponent);
 
