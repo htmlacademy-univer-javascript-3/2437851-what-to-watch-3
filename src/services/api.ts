@@ -43,9 +43,13 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<ErrorMessage>) => {
-      if (error.response && shouldDisplayError(error.response)) {
-        const detailMessage = (error.response.data);
-        toast.warn(detailMessage.details.at(0)?.messages.at(0) ?? detailMessage.message);
+      if (error.response) {
+        if (error.code === 'ERR_NETWORK') {
+          toast.warn('Can\'t reach server. Try again');
+        } else if (shouldDisplayError(error.response)) {
+          const detailMessage = error.response.data;
+          toast.warn(detailMessage.details.at(0)?.messages.at(0) ?? detailMessage.message);
+        }
       }
 
       throw error;

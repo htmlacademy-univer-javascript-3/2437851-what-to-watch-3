@@ -73,7 +73,7 @@ function PlayerScreen(): JSX.Element {
             <progress className="player__progress" value={progress} max="100"></progress>
             <div className="player__toggler" style={{'left': `${progress}%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">{formatTimeLeft(timeLeft)}</div>
+          <div className="player__time-value">{`-${formatTimeLeft(timeLeft)}`}</div>
         </div>
 
         <div className="player__controls-row">
@@ -83,11 +83,11 @@ function PlayerScreen(): JSX.Element {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{film.name}</div>
 
           <button type="button" className="player__full-screen" onClick={handleFullScreen}>
             <svg viewBox="0 0 27 27" width="27" height="27">
-              <use xlinkHref="#full-screen"></use>
+              <use xlinkHref="#full-screen" />
             </svg>
             <span>Full screen</span>
           </button>

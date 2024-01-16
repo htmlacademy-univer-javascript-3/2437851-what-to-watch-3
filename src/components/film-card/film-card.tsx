@@ -30,13 +30,15 @@ function FilmCard({ film, onMouseEnter, onMouseLeave }: FilmCardProps): JSX.Elem
 
   return (
     <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="small-film-card__image">
-        {
-          isHovered
-            ? <PreviewPlayer videoLink={film.previewVideoLink} poster={film.previewImage} width={width} height={height} />
-            : <img src={film.previewImage} width={width} height={height} />
-        }
-      </div>
+      <Link to={`/${AppRoute.Films}/${film.id}`}>
+        <div className="small-film-card__image">
+          {
+            isHovered
+              ? <PreviewPlayer videoLink={film.previewVideoLink} poster={film.previewImage} width={width} height={height} />
+              : <img src={film.previewImage} width={width} height={height} />
+          }
+        </div>
+      </Link>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/${AppRoute.Films}/${film.id}`}>{film.name}</Link>
       </h3>

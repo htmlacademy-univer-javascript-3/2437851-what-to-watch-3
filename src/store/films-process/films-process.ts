@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Film, FilmDetails, PromoFilm } from '../../types/film';
 import { Genre } from '../../types/genre';
-import { ALL_FILMS_GENRE, DEFAULT_FILMS_PAGE_SIZE, Namespace } from '../../consts';
+import { ALL_FILMS_GENRE, DEFAULT_FILMS_PAGE_SIZE, Namespace, VISIBLE_GENRES_COUNT } from '../../consts';
 import { fetchFavoriteFilms, fetchFilm, fetchFilms, fetchPromoFilm, fetchSimilarFilms } from '../api-actions';
 
 const initialState = {
@@ -49,7 +49,7 @@ export const filmsProcess = createSlice({
       .addCase(fetchFilms.fulfilled, (state, action) => {
         state.allFilms = action.payload;
         state.films = action.payload;
-        state.allGenres = [...new Set(state.allFilms.map((f) => f.genre))];
+        state.allGenres = [...new Set(state.allFilms.map((f) => f.genre))].slice(0, VISIBLE_GENRES_COUNT);
         state.allGenres.unshift(ALL_FILMS_GENRE);
         state.isLoading = false;
       })
@@ -86,15 +86,8 @@ export const filmsProcess = createSlice({
       .addCase(fetchSimilarFilms.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(fetchFavoriteFilms.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(fetchFavoriteFilms.fulfilled, (state, action) => {
         state.favoriteFilms = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(fetchFavoriteFilms.rejected, (state) => {
-        state.isLoading = false;
       });
   }
 });

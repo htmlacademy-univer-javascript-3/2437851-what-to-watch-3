@@ -10,6 +10,10 @@ export const ALL_FILMS_GENRE = 'All Genres';
 
 export const FILM_PREVIEW_DURATION_MS = 1000;
 
+export const VISIBLE_GENRES_COUNT = 9;
+
+export const SIMILAR_FILMS_VISIBLE_COUNT = 4;
+
 export const DATE_FORMATTING_OPTIONS: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
 export enum AppRoute {
