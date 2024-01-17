@@ -2,12 +2,21 @@ import { FormEvent, useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import { login } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getAuthorizationDetails } from '../../store/user-process/selectors';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../consts';
 
 function SignInScreen(): JSX.Element {
+  const navigate = useNavigate();
+  const authorizationDetails = useAppSelector(getAuthorizationDetails);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
+
+  if (authorizationDetails) {
+    navigate(AppRoute.Root);
+  }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

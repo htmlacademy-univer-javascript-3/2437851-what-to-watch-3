@@ -8,12 +8,15 @@ import { getCurrentFilm } from '../../store/films-process/selectors';
 function Review(): JSX.Element {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const dispatch = useAppDispatch();
   const film = useAppSelector(getCurrentFilm);
 
   if (film === undefined) {
     return (<NotFoundScreen />);
   }
+
+  const canSubmitReview = rating > 0 && comment.length >= 50 && comment.length <= 400;
 
   const createRatingStar = (n: number): JSX.Element => (
     <>
@@ -24,7 +27,9 @@ function Review(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    setIsSubmittingReview(true);
     dispatch(postReview({comment: comment, filmId: film.id, rating}));
+    setIsSubmittingReview(false);
   };
 
   return (
@@ -41,9 +46,9 @@ function Review(): JSX.Element {
         </div>
 
         <div className="add-review__text">
-          <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={(e) => setComment(e.target.value)}/>
+          <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" disabled={isSubmittingReview} value={comment} onChange={(e) => setComment(e.target.value)}/>
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit">Post</button>
+            <button className="add-review__btn" type="submit" disabled={isSubmittingReview || !canSubmitReview}>Post</button>
           </div>
         </div>
       </form>

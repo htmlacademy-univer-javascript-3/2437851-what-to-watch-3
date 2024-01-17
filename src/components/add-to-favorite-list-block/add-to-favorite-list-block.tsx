@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFavoriteFilms } from '../../store/films-process/selectors';
 import { FilmDetails, PromoFilm } from '../../types/film';
-import { changeFavoriteFilm } from '../../store/api-actions';
+import { setIsFavoriteFilm } from '../../store/api-actions';
 import { getAuthorizationDetails } from '../../store/user-process/selectors';
 import { AppRoute } from '../../consts';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ function AddToFavoriteListBlock({film}: AddToFavoriteListBlockProps): JSX.Elemen
     if (!authorizationDetails) {
       navigate(`/${AppRoute.Login}`);
     } else {
-      dispatch(changeFavoriteFilm({filmId: film.id, status: Number(!film.isFavorite)}));
+      dispatch(setIsFavoriteFilm({filmId: film.id, status: Number(!film.isFavorite)}));
     }
   };
 

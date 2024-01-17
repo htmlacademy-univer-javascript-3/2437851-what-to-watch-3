@@ -13,10 +13,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+store.dispatch(checkAuth());
 store.dispatch(fetchFilms());
 store.dispatch(fetchPromoFilm());
 store.dispatch(fetchFavoriteFilms());
-store.dispatch(checkAuth());
 
 root.render(
   <React.StrictMode>
